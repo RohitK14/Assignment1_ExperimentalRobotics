@@ -1,14 +1,6 @@
-# EROLA_first_assignment_AG
+# Experimental Robotics Assignment 1
 
-October 24, 2020
-
-
-Editors:
-
-* Andrea Gotelli
-
-This file aim to explain how to move inside this project. It should be read before starting to look at either the code and its documentation. It can give some insight on the elements and structure of the code, and what to expect in the documentation.
-
+November 13, 2020
 
 ## <a name="SS-Index"></a>Index
 
@@ -19,176 +11,101 @@ This file aim to explain how to move inside this project. It should be read befo
 * [Installation and Running Procedure](#S-IRP)
 * [Working Hypothesis](#S-WH)
 * [System’s Features](#S-SF)
-* [System’s Limitations](#S-SL)
-* [Possible Technical Improvements](#S-PTI)
+* [System’s Limitations and Possible Technical Improvements](#S-SL)
 * [Authors and Contacts](#S-AC)
 
 
-
 # <a name="S-Introduction"></a>Introduction
-This project contains packages to simulate three behavior for a pet like robot. This simulation is based on a state machine that is implemented using the smach libraries.
+The aim of this assignment is to implement three states of the robot which are Normal, Play and Sleep. We use smach_viewer in ROS to implement these behaviors and visualize the states.
 
 # <a name="S-Sofar"></a>Software Architecture
-The package is for simulating a pet like robot which has three possible behaviors. It can move around randomly, it can interact by playing with the user and it can also sleep when tired. The three states are governed using a finite state machine, which defines the transitions from one state to another. For the knowledge representation, two diagrams are implemented.
-
-* [The State Machine Diagram](#SA-SMD)
-* [The Component Diagram](#SA-CD)
-
 ## <a name="SA-SMD"></a>The State Machine Diagram
-The following figure shows the state machine diagram for this implementation, as well as some knowledge about which interfaces each state has, with respect to the rest of the architecture.
+For implementing the concept, we can see the finite state machine diagram in the image below. Here, there are three states of the robot. The transitions are mentioned in the image.
 
-![EROLA_first_assignment_AG](doc/images/state_machine_and_comp_v2.png)
+![Assignment1_ExperimentalRobotics](images/state_machine.png)
 
-The figure illustrates the three states for this application, beside some components. The aim is to provide insight on the states and transitions as well as the interfaces that all the states have.
-In particular, all the states will be analyzed in the following.
+* Normal - This state has two possible transitions "go_sleep" and "start_play"
+* Play - This state has one outcome where it goes back to the normal state with transition "go_to_normal"
+* Sleep - This state also has one tansition where it goes to normal state with "wake_up"
+## <a name="SA-CD"></a>Component Diagram
+The following figure illustrates how it has been implemented. There are theree ROS nodes. The node *command_genration* publishes the string rostopic */command* which is subscribes by the *state_behavior*. Similarly, the robot motion publishes boolean rostopic */Reached* which is then subscribed by *state_behavior*. Lastly, *geometry_messages/Point* message is published by *state_behavior* and subcribed by *robot_motion*.
+![Assignment1_ExperimentalRobotics](images/CompoentDiagram.png)
 
-* [The Move behavior](#SMD-MOVE)
-* [The Rest behavior](#SMD-REST)
-* [The Play behavior](#SMD-PLAY)
-
-##### <a name="SMD-MOVE"></a>The Move behavior
-
-The robot starts in the in the Move state, where the robot moves randomly in the environment. While moving, the robot do not perform any other activity. For this reason the movement is implemented using a ROS service, in this way the state machine ignore any information received from the outside until the position is reached. This behavior will last until one of the following happens:
-* The robot reaches the maximum level of fatigue : in this case the state will change to [Rest](#SMD-REST)  with the transition "tired"
-* A person has commanded something : in this case the state will change to [Play](#SMD-PLAY) with the transition "playing"
-
-##### <a name="SMD-REST"></a>The Rest behavior
-The Rest behavior simulates the pet like robot when going to sleep. In fact, every movement that the robot perform increases the level of fatigue in the robot. Once the level of fatigue is above a threshold, the Rest behavior is activated. The transition "tired" is the same in both [Move](#SMD-MOVE) and [Play](#SMD-PLAY). Moreover, the threshold can be set from the launch file.
-
-##### <a name="SMD-PLAY"></a>The Play behavior
-When the robot is in the Play behavior, it waits for gesture from the person. When the robot receives a gesture it moves to the pointed location. This behavior will loop for a random number of times, between 1 to 4. As in the [Move](#SMD-MOVE) behavior, the movements are simulated calling the dedicated ROS service.
-Each time the robot moves, the level of fatigue increases. Once it reaches the maximum, the state will change into [Rest](#SMD-REST) with the transition "tired"
-
-
-
-## <a name="SA-CD"></a>The Component Diagram
-The following figure shows the components and their relevant parts of this application. Additionally, it also includes a class diagram inside the state machine component. It is important to understand that all the behaviors are simulated through the execution of the memeber function execute() common to all classes.
-
-![EROLA_first_assignment_AG](doc/images/component_diagram_v3.png)
-
-The figure shows all the component with their interfaces. In the following, a brief description is given for all of them.
-
-* [The move_service_provider component](#CD-msp)
-* [The person component](#SMD-p)
-* [The state_machine component](#SMD-sm)
-
-
-##### <a name="CD-msp"></a>The move_service_provider component
-This component is a simple ROS service provider written in C++. It only contains the node initialization and the service server declaration. Its main component is the MoveToGivenPosition that is the service callback. This function is called each time a request is sent to the service. It simply wait for some time before returning true allowing the simulation to continue. The time that the function waits randomly change between 3 and 6 seconds.
-
-
-##### <a name="CD-p"></a>The person component
-The person component is a ROS node written in C++. It contains a publisher, a subscriber and a service provider. The subscriber is for retrieve the current state of the [state machine](#CD-sm). The publisher is for publishing the command to the pet like robot. The command is published only if: the state machine is in the [Move](#SMD-MOVE) state and it has passed a specific amount of time from the last call. This time elapsed varies randomly in an interval given by the user, setting the [related parameters](#MSG-P) in the launch file. Finally, the service provider has a callback function represented by the computational component: PointingGesture. This function simply simulate the person pointing a location first by generating a random 2D position, then by waiting some time randomly chosen between 3 and 6 seconds.
-
-
-##### <a name="CD-sm"></a>The state_machine component
-The state machine node is the heart of this simulation. It implements a state machine from the template of smach. The state machine offers three behaviors for the robot: [Move](#SMD-MOVE), [Play](#SMD-PLAY) and [Rest](#SMD-REST). Each behavior is implemented in the homonymous class. The class has only a constructor, where all the members are initialized and a member function execute(). As already discussed, in this last function the features for the corresponding behavior are implemented.
-
-
-## <a name="SA-MSG"></a>The Messages and Parameters
-This package has some custom messages, services and parameters which are described in the following.
-
-### <a name="MSG-MSG"></a>The Message
-The message defined in this project is the following:
-  * PersonCalling: is a message containing a string and a geometry_msgs Pose. It contains the command the person has given in the string and the position of the person in the geometry message.
-
-### <a name="MSG-SRV"></a>The Services
-Beside the message, this project makes use of two services:
-  * GiveGesture: is the service message containing the request and the answer for the service providing the position where the person was pointing. It contains a boolean in the request, and a geometry_msgs Pose in the response. The boolean can be ignored when calling the service. It is used only because a service cannot be defined without at least one argument in the question. The response is the pointed location.
-  * MoveTo: this is the service message used for the service simulating the robot movements. It contains the position the robot has to reach. it confirms the robot to have reached the position through the return of the callback, which is a boolean. IN other words, there is not a response field for this service.  
-
+### <a name="SA-MSG"></a>The Messages 
+This package has some messages which are described in the following.
+* geometry_messages/Point - It is used for the x,y coordinate of the robot.
+* std_msgs/Bool - To check if the robot has reached the position or not.
+* std_msgs/String - To receive the command from person to play with the robot.
 ### <a name="MSG-P"></a>The Parameters
-Finally, in this project there are some parameters which can be set from the launch file, allowing the user to easily change them before running the application. The parameters that can be changes are listed below.
-* world_width and world_height: allow to set the dimensions of the discretized 2D world.
-* sleep_x_coord and sleep_y_coord: allow to freely chose the sleeping position i.e. the position where the robot goes when in the [Rest](#SMD-REST) behavior.
-* minum_time_btw_calls and maximum_time_btw_calls allow to set the range where the time between two call to play will range.
-* fatigue_threshold: allow to set how many movement the robot can perform before reaching the [Rest](#SMD-REST) behavior.
+The following parameters are launched from the launch file. These can be altered using the launch file in robot_motion/launch/behaviors.launch thus allowing flexibility.
+* world_width and world_height: These are used for setting the 2D environment.
+* home_x and home_y: These define the SLEEP coordinates of the behavior. The robot goes to this position when it is tired.
+* fast: These parameter is used to travel faster while navigating between two points in the environment.
+* tireness_level: This defines the threshold of the robot when it is under any state. 
 
 
 # <a name="S-PFL"></a>Packages and Files List
 
-The following image shows the overall structure for the project and where to find a specific file.
+There are two packages in python, which are *command_generation.py* and *state_behavior.py* under finite_state_machine/src folder.
+There is one C++ file whihc is *random_motion.cpp* under robot_motion/src folder.
 
-The doc folder contains the doxygen file as well as the index.html file that is the one to be opened with the browser in order to visualize the documentation.
-
-There are three packages where to find all the files for this project. In robot_simulation there are the two cpp files for the [person](#CD-p) and [move_service_provider](#CD-msp) nodes. Additionally, in this package is also present a launch file, in the homonymous folder. In the package robot_simulation_messages there are the [generated messages and services](#SA-MSG) used in this application. Finally, in the state_machine machine package, there is the python scrip state_machine.py containing the code for the [state_machine](#CD-sm) node.
-
-![EROLA_first_assignment_AG](doc/images/tree_.png)
-
-
+The doc folder contains the doxygen file as well as the index.html file which can be used to see the documentation in the browser.
 
 # <a name="S-IRP"></a>Installation and Running Procedure
-Firt you need to git clone the project, in your ROS1 workspace:
+Firstly, the repository should be cloned into the ROS workspace with the command
 
-    git clone https://github.com/aGotelli/EROLA_first_assignment_AG.git
+    git clone https://github.com/RohitK14/Assignment1_ExperimentalRobotics.git
+    
+As the state machine is implemented using smach_viewer, we need to install it, if it is not available.
 
-In order to use this application is necessary to install smach. To do that it is sufficient to run the following:
+    sudo apt-get install ros-<melodic>-smach-viewer
 
-    sudo apt-get install ros-<distro>-smach-viewer
+where <meldoc> is the ROS distribution in the system. 
 
-where at the place of <distro> has to be written the installed ROS distribution. The command will install the viewer in order to visualize the behavior and the state in the state machine.
+Now, we need to build the workspace. It can be done using catkin build command. In the workspace, use catkin build
 
-You need then to build your workspace, using catkin_make or catkin build command. However, catkin build is recommended. If you use catkin_make then run
+    catkin build
 
-    catkin_make robot_simulation_messages
+The python scripts are not executable. Hence, go to finite_state_machine/src folder and run the following command to make it executatble,
 
-And then
-    catkin_make
+    chmod +x state_behavior.py
+    chmod +x command_generation.py
 
-Else if you use catkin build then a normal call is sufficient.
+To run the application, we can run it using the launch file,
 
-You then need to make the script executable. In the state_machine/scripts folder run :
+    roslaunch robot_motion behaviors.launch
 
-    chmod +x state_machine.py
+To switch the state to play, the user gives the command "play" using the follwing command
 
-To run this application it is sufficient to launch the only launch file that is present in the robot_simulation package. After having build the package you can simply run:
+    rostopic pub /command std_msgs/String play
 
-    roslaunch robot_simulation run_behaviors.launch
+In order to generate the documentation, there is a Doxyfile in the doc folder. To see the documentation we run,
 
-In order to generate the documentation, the is a Doxyfile in the doc folder. You have to run from terminal:
-
-    doxygen Doxyfile && firefox html/index.html
-
-in the doc folder. If you have not doxygen installed, [here](https://www.doxygen.nl/index.html) you can find Installation procedure and commands.
+    doxygen Doxyfile && firefox html/index.html 
 
 # <a name="S-WH"></a>Working Hypothesis and Environment
-The pet like robot is simulated in his behavior in a discretized world. It means that in this application the world is described as an empty plane where only integer position are defined.
-The application works under the hypothesis that everything that could be considered as low level is ignored. In other words, this application is just for testing the architecture and to stress the system with what could be some possible input, disregarding how these events should be modeled.
-In this application, when the robot moves, it is assumed to not respond to any other stimulus. Every command or notification received will be processed only when the motion is finished. Moreover, the same hypothesis holds when the robot waits for a gesture.
+The hypothesis that is considered here is that the robot starts in the NORMAL state. When the robot is randomly moving in the 2D environment, it gets tired. We have a parameter that decided the tireness level. If the level is 5, the robot reaches 5 positions and goes to SLEEP state. The sleep state is considered to be at origin which can be changed using the parameters. The robot sleeps for 10 seconds as per our hypothesis.
+The robot goes between these two states unless there the user publish "play" command. Whenever, we receive play command, the robot finishes it's last motion and goes to the person. The person position is generated randomly whenever we revceive "play" command. It is confirmed that the robot reahces the person and waits for the gesture coordinates. The gesture coordinates are random and the robot goes to position and comes back to the person. This is repeated until the robot does this to and fro motion before crossing the tired level. The robot is not expected to get tired in between and go to sleep position. The only possible state for the transition is normal state before going to sleep state. 
 
 # <a name="S-SF"></a>System’s features
-The application allows the user to simulate the architecture to be implemented. It allows they to change important settings in order to test in different scenarios. The user can choose parameters like: the range where is randomly selected the time to wait between two calls of play, where the robot go when sleeping and the world dimensions.
-The system is capable to keep track of the received command even when performing motion and waiting to the gesture. In fact, with the use of the standard queue for the ROS subscriber, all the topic received will be stored and processed later.
-
-Moreover, the node responsible to simulate the person has some insight about the robot. In fact, it subscribes to the topic used to the state machine to publish the current state. In this way, it was possible to ensure that the command is published only if the robot is in the [Move](#SMD-MOVE).
-
-# <a name="S-SF"></a>System’s limitations
-The system is not currently able to simulate a real motion, it just waits for some random time before ideally reach the desired position. Additionally, the system is able to simulate only one interaction with the person through the command "play". Moreover, some components use services as interfaces. This leads to the problem that if a service provider component blocks while providing the response the whole application resents of the situation. For example, if a service server crashes, than the call to that server will lead to an error or other problem.
-
-Furthermore, some parameters can be defined in the launch file but there are no tools to chek the user's settings. Usually, when there some possibility for the user to chose parameters, there should be implemented an error handling section in order to prevent the user to set inconsistent parameters.
-
-Finally, there is no implementation of the smach_viewer interface. This interface allows a more user friendly interpretation but it is not supported in python3 which is used in Ubuntu 20.04.
-
-Moreover, there is no version control. In other words, this project was developed in Ubuntu 20.04 using python3 and ROS Noetic. Using this package with older versions of ROS and/or python3 could lead to unexpected error. 
+* The 2D environment which can be changed by the user.
+* All states and information available on the terminal where we launch the file.
+* The publisher command has to be given from another terminal.
+* smach_viewer for visualising the states.
+* Play command can be send any time between the states.
 
 
-# <a name="S-PTI"></a>Possible Technical Improvements
-This project was developed with the aim of being possible to implement, improve and change features during the time. Some further work which could improve the performance of the application could be the following.
-* Add an error handling section in order to prevent the user to input inconsistent data.
-* Implement some graphic interface in order to see the robot in the environment as well as the person and the pointed location.
-* Implement a motion control in order to substitute the idealization of the motion with an actual motion control of the robot.
-* Introduce the possibility for the user to interact directly with the application, for example through the keyboard.
-* Change the interfaces which make use of service in order to favour non blocking interfaces.
-* Implement other possible command and realise different outcome for the [Move](#STD-MOVE) state.
-* Add the smach_viewer interface once solved the problem of integration or when the package itself is ported in python3.
+# <a name="S-SF"></a>System’s limitations and Possible Technical Improvements
+* The command has to be given from another terminal.
+* No gazebo or RViz visualization for better understanding.
+* There is a possibilty that the robot can go to sleep while playing when it is tired.
+* The person does not give the gesture command, although in our case we force to generate random gesture commands
+* No odometry control, the time to reach between the points is roughly caclulated.
 
-Furter technical Improvements, which will require more work, could be
-* Implement a real control algorithm to make the robot to move
-* Implement a component able to recognize the gesture and estimate the person position in a real application.
+The main aim of the assignment is to implement the architecture of the required behavior. Although, we can resolve the above limmitations to improve it. 
 
 # <a name="S-AC"></a>Authors and Contacts
-This project was relized by Andrea Gotelli.
+This project was relized by Rohit Kumar
 
-University email 4343879@unige.it
-
-gmail: gotelliandrea@gmail.it
+University email s5089482@studenti.unige.it
+gmail: rohitkb114@gmail.com
