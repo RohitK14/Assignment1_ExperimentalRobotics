@@ -1,0 +1,22 @@
+<launch>
+    <!-- Parameters for the world -->
+    <param name="world_width"  value="20" />
+    <param name="world_height" value="20" />
+
+    <!-- Parameters to define the sleeping position -->
+    <param name="home_x" value="0" />
+    <param name="home_y" value="0" />
+    <!--Parameter for speeding up the motion-->
+     <param name="fast" value="5" />
+    <!-- Parameter to speed the motion while navigating -->
+    <param name="tireness_level" value="5" />
+
+    <!-- Launch the node responsible  for the movement -->
+    <node pkg="robot_motion" type="robot_motion_random_motion" name="random_motion" output="screen"/>
+    <!--Launch this node for play behavior-->
+    <node pkg="finite_state_machine" type="command_generation.py" name="command_input"  output="screen"/>
+    <!-- Launch the node for the state machine, that controls behaviors normal,sleep, and play -->
+    <node pkg="finite_state_machine" type="state_behavior.py" name="finite_state_machine"  output="screen"/>
+
+    
+</launch>

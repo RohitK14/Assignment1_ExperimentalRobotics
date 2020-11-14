@@ -1,0 +1,113 @@
+\hypertarget{namespacestate__behavior}{}\section{state\+\_\+behavior Namespace Reference}
+\label{namespacestate__behavior}\index{state\+\_\+behavior@{state\+\_\+behavior}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classstate__behavior_1_1Normal}{Normal}
+\begin{DoxyCompactList}\small\item\em This class defines the state of the state machine corresponding to the robot randomly moving in the 2D plane. \end{DoxyCompactList}\item 
+class \hyperlink{classstate__behavior_1_1Play}{Play}
+\item 
+class \hyperlink{classstate__behavior_1_1Sleep}{Sleep}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacestate__behavior_a8fd0bb9039915d9f16d70a83ed55df4f}{reach\+Callback} (x)
+\begin{DoxyCompactList}\small\item\em brief reach\+Callback is a callback for the rostopic /\+Reached \end{DoxyCompactList}\item 
+def \hyperlink{namespacestate__behavior_a2e9f12e323b40da64c0afaf87e2b5586}{command\+Callback} (str\+\_\+play)
+\begin{DoxyCompactList}\small\item\em brief command\+Callback is a callback for the rostopic /command \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespacestate__behavior_a1c359ce0b57ff933eb53479a7055433f}\label{namespacestate__behavior_a1c359ce0b57ff933eb53479a7055433f}} 
+def {\bfseries main} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespacestate__behavior_a7a397ba26a454dc72759f7de0cb3edf9}\label{namespacestate__behavior_a7a397ba26a454dc72759f7de0cb3edf9}} 
+{\bfseries command} = None
+\item 
+\mbox{\Hypertarget{namespacestate__behavior_a7679cd67c5e408fb282c238217e48674}\label{namespacestate__behavior_a7679cd67c5e408fb282c238217e48674}} 
+int {\bfseries width} = 0
+\item 
+\mbox{\Hypertarget{namespacestate__behavior_a9e9db3cff0d60ec9be95c949e548bc92}\label{namespacestate__behavior_a9e9db3cff0d60ec9be95c949e548bc92}} 
+int {\bfseries height} = 0
+\item 
+\mbox{\Hypertarget{namespacestate__behavior_a7f5cd24ba5eaaee2d4121631332f75ef}\label{namespacestate__behavior_a7f5cd24ba5eaaee2d4121631332f75ef}} 
+int {\bfseries tired\+\_\+level} = 0
+\item 
+\mbox{\Hypertarget{namespacestate__behavior_a7880d342fb3cfc79be12c84ab2708c51}\label{namespacestate__behavior_a7880d342fb3cfc79be12c84ab2708c51}} 
+{\bfseries home\+\_\+fixed} = Point()
+\item 
+\mbox{\Hypertarget{namespacestate__behavior_aff5119b4de24c6b8d6b13983d14ec801}\label{namespacestate__behavior_aff5119b4de24c6b8d6b13983d14ec801}} 
+{\bfseries speed} = rospy.\+get\+\_\+param(\textquotesingle{}fast\textquotesingle{},1)
+\item 
+\mbox{\Hypertarget{namespacestate__behavior_a81c03edeb24625dc27b1321ed4a79954}\label{namespacestate__behavior_a81c03edeb24625dc27b1321ed4a79954}} 
+{\bfseries x}
+\item 
+\mbox{\Hypertarget{namespacestate__behavior_aac40ce021d02d106f4de8f42a155066a}\label{namespacestate__behavior_aac40ce021d02d106f4de8f42a155066a}} 
+{\bfseries y}
+\item 
+\mbox{\Hypertarget{namespacestate__behavior_aa1b3718a8d4a00dc6bcad60ac64e5991}\label{namespacestate__behavior_aa1b3718a8d4a00dc6bcad60ac64e5991}} 
+{\bfseries prev\+\_\+pos} = Point()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}#   \file finite_state_machine.py
+#   \brief This file contains the state machine for implementing three behaviors-play, normal and sleep
+#   \author Rohit Kumar
+#   \version 0.2
+#   \date 2020-11-13
+#
+#   \param [in] width the width of the discretized world
+#   \param [in] height the height of the discretized world
+#   \param [in] home_x is the x coordinate of the position where the robot sleeps
+#   \param [in] home_y is the y coordinate of the position where the robot sleeps
+#   \param [in] tired_level decides when the robot is tired to doing the task.
+#   \param [in] speed tells the amount at which the robot travels between two points
+#
+#   \details
+#
+#   Description :
+#
+#   It uses smach libraries to implement the behaviors.
+#   Specifically, the state machine defines the transition from a state to
+#   another using the interface provided by smach.
+#
+#   
+#   The states are defined in the respective classes, and the transistions are automatically performed
+#   by the state machine from the smach libraries.
+#
+\end{DoxyVerb}
+ 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespacestate__behavior_a2e9f12e323b40da64c0afaf87e2b5586}\label{namespacestate__behavior_a2e9f12e323b40da64c0afaf87e2b5586}} 
+\index{state\+\_\+behavior@{state\+\_\+behavior}!command\+Callback@{command\+Callback}}
+\index{command\+Callback@{command\+Callback}!state\+\_\+behavior@{state\+\_\+behavior}}
+\subsubsection{\texorpdfstring{command\+Callback()}{commandCallback()}}
+{\footnotesize\ttfamily def state\+\_\+behavior.\+command\+Callback (\begin{DoxyParamCaption}\item[{}]{str\+\_\+play }\end{DoxyParamCaption})}
+
+
+
+brief command\+Callback is a callback for the rostopic /command 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \mbox{[}std\+\_\+msgs/\+Strings\mbox{]} is the command to call the robot for playing with the person \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacestate__behavior_a8fd0bb9039915d9f16d70a83ed55df4f}\label{namespacestate__behavior_a8fd0bb9039915d9f16d70a83ed55df4f}} 
+\index{state\+\_\+behavior@{state\+\_\+behavior}!reach\+Callback@{reach\+Callback}}
+\index{reach\+Callback@{reach\+Callback}!state\+\_\+behavior@{state\+\_\+behavior}}
+\subsubsection{\texorpdfstring{reach\+Callback()}{reachCallback()}}
+{\footnotesize\ttfamily def state\+\_\+behavior.\+reach\+Callback (\begin{DoxyParamCaption}\item[{}]{x }\end{DoxyParamCaption})}
+
+
+
+brief reach\+Callback is a callback for the rostopic /\+Reached 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \mbox{[}std\+\_\+msgs/\+Bool\mbox{]} is the confirmation that the robot reached the position \\
+\hline
+\end{DoxyParams}

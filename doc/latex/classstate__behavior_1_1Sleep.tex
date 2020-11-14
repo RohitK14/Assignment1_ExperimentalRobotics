@@ -1,0 +1,76 @@
+\hypertarget{classstate__behavior_1_1Sleep}{}\section{state\+\_\+behavior.\+Sleep Class Reference}
+\label{classstate__behavior_1_1Sleep}\index{state\+\_\+behavior.\+Sleep@{state\+\_\+behavior.\+Sleep}}
+
+
+Inheritance diagram for state\+\_\+behavior.\+Sleep\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=188pt]{classstate__behavior_1_1Sleep__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for state\+\_\+behavior.\+Sleep\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=188pt]{classstate__behavior_1_1Sleep__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classstate__behavior_1_1Sleep_a6550cf2697cc65d83162891ad194fe2d}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self)
+\begin{DoxyCompactList}\small\item\em {\bfseries init} initialises the \hyperlink{classstate__behavior_1_1Sleep}{Sleep} state in the smach\+\_\+state \end{DoxyCompactList}\item 
+def \hyperlink{classstate__behavior_1_1Sleep_a79cf281b29f33265acc97354865a2f3c}{execute} (self, userdata)
+\begin{DoxyCompactList}\small\item\em In this \hyperlink{classstate__behavior_1_1Sleep_a79cf281b29f33265acc97354865a2f3c}{execute()} function, the robot goes to predefined home\+\_\+fixed position The position is published in the topic /move\+To\+Pose The logic used here is that if we receive a command play in the middle, it reaches the last coordinate and that is published in the rostopic /move\+To\+Pose and shifts to \hyperlink{classstate__behavior_1_1Play}{Play} state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classstate__behavior_1_1Sleep_abd6af3621ac6fd6caab94e5ebd1d87ad}\label{classstate__behavior_1_1Sleep_abd6af3621ac6fd6caab94e5ebd1d87ad}} 
+{\bfseries pub}
+\item 
+\mbox{\Hypertarget{classstate__behavior_1_1Sleep_a937ce4dfca4da54cb10ea6c00fa01bee}\label{classstate__behavior_1_1Sleep_a937ce4dfca4da54cb10ea6c00fa01bee}} 
+{\bfseries is\+Reached}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classstate__behavior_1_1Sleep_a6550cf2697cc65d83162891ad194fe2d}\label{classstate__behavior_1_1Sleep_a6550cf2697cc65d83162891ad194fe2d}} 
+\index{state\+\_\+behavior\+::\+Sleep@{state\+\_\+behavior\+::\+Sleep}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!state\+\_\+behavior\+::\+Sleep@{state\+\_\+behavior\+::\+Sleep}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def state\+\_\+behavior.\+Sleep.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+{\bfseries init} initialises the \hyperlink{classstate__behavior_1_1Sleep}{Sleep} state in the smach\+\_\+state 
+
+
+\begin{DoxyParams}{Parameters}
+{\em outcomes} & are the possible transition is it can to normal state by wake\+\_\+up transition \\
+\hline
+{\em input\+\_\+keys} & These are possible input of the state \\
+\hline
+{\em output\+\_\+keys} & These are possible outputs of the state. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classstate__behavior_1_1Sleep_a79cf281b29f33265acc97354865a2f3c}\label{classstate__behavior_1_1Sleep_a79cf281b29f33265acc97354865a2f3c}} 
+\index{state\+\_\+behavior\+::\+Sleep@{state\+\_\+behavior\+::\+Sleep}!execute@{execute}}
+\index{execute@{execute}!state\+\_\+behavior\+::\+Sleep@{state\+\_\+behavior\+::\+Sleep}}
+\subsubsection{\texorpdfstring{execute()}{execute()}}
+{\footnotesize\ttfamily def state\+\_\+behavior.\+Sleep.\+execute (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{userdata }\end{DoxyParamCaption})}
+
+
+
+In this \hyperlink{classstate__behavior_1_1Sleep_a79cf281b29f33265acc97354865a2f3c}{execute()} function, the robot goes to predefined home\+\_\+fixed position The position is published in the topic /move\+To\+Pose The logic used here is that if we receive a command play in the middle, it reaches the last coordinate and that is published in the rostopic /move\+To\+Pose and shifts to \hyperlink{classstate__behavior_1_1Play}{Play} state. 
+
+Otherwise the robot goes to \char`\"{}\+Sleep\char`\"{} state after it gets tired 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/rohit/\+Exp\+Robo\+Assignment/src/finite\+\_\+state\+\_\+machine/src/state\+\_\+behavior.\+py\end{DoxyCompactItemize}

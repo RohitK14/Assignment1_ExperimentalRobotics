@@ -1,0 +1,89 @@
+\hypertarget{classstate__behavior_1_1Normal}{}\section{state\+\_\+behavior.\+Normal Class Reference}
+\label{classstate__behavior_1_1Normal}\index{state\+\_\+behavior.\+Normal@{state\+\_\+behavior.\+Normal}}
+
+
+This class defines the state of the state machine corresponding to the robot randomly moving in the 2D plane.  
+
+
+
+
+Inheritance diagram for state\+\_\+behavior.\+Normal\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=195pt]{classstate__behavior_1_1Normal__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for state\+\_\+behavior.\+Normal\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=195pt]{classstate__behavior_1_1Normal__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classstate__behavior_1_1Normal_a73b4aa2844d6c7f4b35bbb53cea791dd}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self)
+\begin{DoxyCompactList}\small\item\em {\bfseries init} initialises the \hyperlink{classstate__behavior_1_1Normal}{Normal} state in the smach\+\_\+state \end{DoxyCompactList}\item 
+def \hyperlink{classstate__behavior_1_1Normal_ad34ac585f5ba450b5e2921bb69132f4d}{execute} (self, userdata)
+\begin{DoxyCompactList}\small\item\em In this \hyperlink{classstate__behavior_1_1Normal_ad34ac585f5ba450b5e2921bb69132f4d}{execute()} function, the robot randomly walks in the environment until it reaches the tired\+\_\+level The logic used here is that if we receive a command play in the middle, it reaches the last coordinate and that is published in the rostopic /move\+To\+Pose and shifts to \hyperlink{classstate__behavior_1_1Play}{Play} state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classstate__behavior_1_1Normal_af8396ab1f88ae1ea117eab1702245e35}\label{classstate__behavior_1_1Normal_af8396ab1f88ae1ea117eab1702245e35}} 
+{\bfseries pub}
+\item 
+\mbox{\Hypertarget{classstate__behavior_1_1Normal_af3a907e6ca2e16d50543abb06dc8e41c}\label{classstate__behavior_1_1Normal_af3a907e6ca2e16d50543abb06dc8e41c}} 
+{\bfseries is\+Reached}
+\item 
+\mbox{\Hypertarget{classstate__behavior_1_1Normal_a9569665701706ec91ab67cb28f4ad231}\label{classstate__behavior_1_1Normal_a9569665701706ec91ab67cb28f4ad231}} 
+{\bfseries command\+\_\+play}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class defines the state of the state machine corresponding to the robot randomly moving in the 2D plane. 
+
+It is a inheritance from smach and the state is added to the smach\+\_\+state. In this state the robot moves around randomly by subscribing to the rostopic /move\+To\+Pose. It has a function \hyperlink{classstate__behavior_1_1Normal_ad34ac585f5ba450b5e2921bb69132f4d}{execute()} providing the intended behavior. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classstate__behavior_1_1Normal_a73b4aa2844d6c7f4b35bbb53cea791dd}\label{classstate__behavior_1_1Normal_a73b4aa2844d6c7f4b35bbb53cea791dd}} 
+\index{state\+\_\+behavior\+::\+Normal@{state\+\_\+behavior\+::\+Normal}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!state\+\_\+behavior\+::\+Normal@{state\+\_\+behavior\+::\+Normal}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def state\+\_\+behavior.\+Normal.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+{\bfseries init} initialises the \hyperlink{classstate__behavior_1_1Normal}{Normal} state in the smach\+\_\+state 
+
+
+\begin{DoxyParams}{Parameters}
+{\em outcomes} & are the possible transitions which are either it can go to normal ot play state \\
+\hline
+{\em input\+\_\+keys} & These are possible input of the state \\
+\hline
+{\em output\+\_\+keys} & These are possible outputs of the state. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classstate__behavior_1_1Normal_ad34ac585f5ba450b5e2921bb69132f4d}\label{classstate__behavior_1_1Normal_ad34ac585f5ba450b5e2921bb69132f4d}} 
+\index{state\+\_\+behavior\+::\+Normal@{state\+\_\+behavior\+::\+Normal}!execute@{execute}}
+\index{execute@{execute}!state\+\_\+behavior\+::\+Normal@{state\+\_\+behavior\+::\+Normal}}
+\subsubsection{\texorpdfstring{execute()}{execute()}}
+{\footnotesize\ttfamily def state\+\_\+behavior.\+Normal.\+execute (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{userdata }\end{DoxyParamCaption})}
+
+
+
+In this \hyperlink{classstate__behavior_1_1Normal_ad34ac585f5ba450b5e2921bb69132f4d}{execute()} function, the robot randomly walks in the environment until it reaches the tired\+\_\+level The logic used here is that if we receive a command play in the middle, it reaches the last coordinate and that is published in the rostopic /move\+To\+Pose and shifts to \hyperlink{classstate__behavior_1_1Play}{Play} state. 
+
+Otherwise the robot goes to \char`\"{}\+Sleep\char`\"{} state after it gets tired 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/rohit/\+Exp\+Robo\+Assignment/src/finite\+\_\+state\+\_\+machine/src/state\+\_\+behavior.\+py\end{DoxyCompactItemize}

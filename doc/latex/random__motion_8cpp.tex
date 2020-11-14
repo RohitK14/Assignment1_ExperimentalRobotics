@@ -1,0 +1,98 @@
+\hypertarget{random__motion_8cpp}{}\section{/home/rohit/\+Exp\+Robo\+Assignment/src/robot\+\_\+motion/src/random\+\_\+motion.cpp File Reference}
+\label{random__motion_8cpp}\index{/home/rohit/\+Exp\+Robo\+Assignment/src/robot\+\_\+motion/src/random\+\_\+motion.\+cpp@{/home/rohit/\+Exp\+Robo\+Assignment/src/robot\+\_\+motion/src/random\+\_\+motion.\+cpp}}
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}ros/ros.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$std\+\_\+msgs/\+Int16.\+h$>$}\newline
+{\ttfamily \#include $<$geometry\+\_\+msgs/\+Point.\+h$>$}\newline
+{\ttfamily \#include $<$std\+\_\+msgs/\+Bool.\+h$>$}\newline
+Include dependency graph for random\+\_\+motion.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{random__motion_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{random__motion_8cpp_aad593c86a4f2bd1ff9f0fc321583c0d5}{pos\+Callback} (geometry\+\_\+msgs\+::\+Point \+\_\+point)
+\begin{DoxyCompactList}\small\item\em pos\+Callback function listens to the topic /move\+To\+Pos. It records the postions to be reached. The fucntion then declares that the positon is reached to be published on the topic /\+Rested \end{DoxyCompactList}\item 
+int \hyperlink{random__motion_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em In this funciton we listen subscribe to rostopic /move\+To\+Pose and publishes to rostopic /\+Reached. The idea here is that we say the robot has reached the position only after the robot has reahced the target. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+geometry\+\_\+msgs\+::\+Point \hyperlink{random__motion_8cpp_a481fb0076093985fd795ac2a67b47468}{move\+\_\+coord}
+\item 
+\mbox{\Hypertarget{random__motion_8cpp_a46260f4238c3b1e06271009e83cf6c96}\label{random__motion_8cpp_a46260f4238c3b1e06271009e83cf6c96}} 
+std\+\_\+msgs\+::\+Bool {\bfseries position\+\_\+reached}
+\item 
+\mbox{\Hypertarget{random__motion_8cpp_abdd9b1bae9f506cf5a415e5af7d17493}\label{random__motion_8cpp_abdd9b1bae9f506cf5a415e5af7d17493}} 
+bool {\bfseries reached\+\_\+} = false
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Rohit Kumar (\href{mailto:rohitkb114@gmail.com}{\tt rohitkb114@gmail.\+com}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2020-\/11-\/13
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2020 
+\end{DoxyCopyright}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{random__motion_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{random__motion_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{random\+\_\+motion.\+cpp@{random\+\_\+motion.\+cpp}!main@{main}}
+\index{main@{main}!random\+\_\+motion.\+cpp@{random\+\_\+motion.\+cpp}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+In this funciton we listen subscribe to rostopic /move\+To\+Pose and publishes to rostopic /\+Reached. The idea here is that we say the robot has reached the position only after the robot has reahced the target. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & \\
+\hline
+{\em argv} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{random__motion_8cpp_aad593c86a4f2bd1ff9f0fc321583c0d5}\label{random__motion_8cpp_aad593c86a4f2bd1ff9f0fc321583c0d5}} 
+\index{random\+\_\+motion.\+cpp@{random\+\_\+motion.\+cpp}!pos\+Callback@{pos\+Callback}}
+\index{pos\+Callback@{pos\+Callback}!random\+\_\+motion.\+cpp@{random\+\_\+motion.\+cpp}}
+\subsubsection{\texorpdfstring{pos\+Callback()}{posCallback()}}
+{\footnotesize\ttfamily void pos\+Callback (\begin{DoxyParamCaption}\item[{geometry\+\_\+msgs\+::\+Point}]{\+\_\+point }\end{DoxyParamCaption})}
+
+
+
+pos\+Callback function listens to the topic /move\+To\+Pos. It records the postions to be reached. The fucntion then declares that the positon is reached to be published on the topic /\+Rested 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+point} & It takes the argument as point after subscribing to the topic /move\+To\+Pose \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{random__motion_8cpp_a481fb0076093985fd795ac2a67b47468}\label{random__motion_8cpp_a481fb0076093985fd795ac2a67b47468}} 
+\index{random\+\_\+motion.\+cpp@{random\+\_\+motion.\+cpp}!move\+\_\+coord@{move\+\_\+coord}}
+\index{move\+\_\+coord@{move\+\_\+coord}!random\+\_\+motion.\+cpp@{random\+\_\+motion.\+cpp}}
+\subsubsection{\texorpdfstring{move\+\_\+coord}{move\_coord}}
+{\footnotesize\ttfamily geometry\+\_\+msgs\+::\+Point move\+\_\+coord}
+
+These are R\+OS specific headers $<$ Integer related headers Header required for geometry\+\_\+messages 

@@ -1,0 +1,71 @@
+\hypertarget{classstate__behavior_1_1Play}{}\section{state\+\_\+behavior.\+Play Class Reference}
+\label{classstate__behavior_1_1Play}\index{state\+\_\+behavior.\+Play@{state\+\_\+behavior.\+Play}}
+
+
+Inheritance diagram for state\+\_\+behavior.\+Play\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=183pt]{classstate__behavior_1_1Play__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for state\+\_\+behavior.\+Play\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=183pt]{classstate__behavior_1_1Play__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classstate__behavior_1_1Play_af233d9d46accf0b314f2216d6add02ae}{\+\_\+\+\_\+init\+\_\+\+\_\+} (self)
+\begin{DoxyCompactList}\small\item\em {\bfseries init} initializes the \hyperlink{classstate__behavior_1_1Play}{Play} state with the outcome go\+\_\+to\+\_\+normal. \end{DoxyCompactList}\item 
+def \hyperlink{classstate__behavior_1_1Play_a0b3baf44027bc1d5ec262ea8b67063b9}{execute} (self, userdata)
+\begin{DoxyCompactList}\small\item\em In this \hyperlink{classstate__behavior_1_1Play_a0b3baf44027bc1d5ec262ea8b67063b9}{execute()}, we implement play behavior. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classstate__behavior_1_1Play_a0f0c471a70ad29733e9422a31adea20f}\label{classstate__behavior_1_1Play_a0f0c471a70ad29733e9422a31adea20f}} 
+{\bfseries pub}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classstate__behavior_1_1Play_af233d9d46accf0b314f2216d6add02ae}\label{classstate__behavior_1_1Play_af233d9d46accf0b314f2216d6add02ae}} 
+\index{state\+\_\+behavior\+::\+Play@{state\+\_\+behavior\+::\+Play}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!state\+\_\+behavior\+::\+Play@{state\+\_\+behavior\+::\+Play}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def state\+\_\+behavior.\+Play.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+{\bfseries init} initializes the \hyperlink{classstate__behavior_1_1Play}{Play} state with the outcome go\+\_\+to\+\_\+normal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em outcomes} & lists the possible transitions. From play we can go to normal state. \\
+\hline
+{\em input\+\_\+keys} & It is the possible input of the state  output keys It is the possible output of the state \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classstate__behavior_1_1Play_a0b3baf44027bc1d5ec262ea8b67063b9}\label{classstate__behavior_1_1Play_a0b3baf44027bc1d5ec262ea8b67063b9}} 
+\index{state\+\_\+behavior\+::\+Play@{state\+\_\+behavior\+::\+Play}!execute@{execute}}
+\index{execute@{execute}!state\+\_\+behavior\+::\+Play@{state\+\_\+behavior\+::\+Play}}
+\subsubsection{\texorpdfstring{execute()}{execute()}}
+{\footnotesize\ttfamily def state\+\_\+behavior.\+Play.\+execute (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{userdata }\end{DoxyParamCaption})}
+
+
+
+In this \hyperlink{classstate__behavior_1_1Play_a0b3baf44027bc1d5ec262ea8b67063b9}{execute()}, we implement play behavior. 
+
+A random position is generated for a person. The robot goes to the person, waits for the gesture and and goes to gesture position. the robot goes and comes back to the gesture position and waits for another gesture position until it gets tired. At last the robot goes to \hyperlink{classstate__behavior_1_1Normal}{Normal} position. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/rohit/\+Exp\+Robo\+Assignment/src/finite\+\_\+state\+\_\+machine/src/state\+\_\+behavior.\+py\end{DoxyCompactItemize}
